@@ -1,8 +1,11 @@
+using ECommerce.WebApi.Contexts;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
 
 builder.Services.AddControllers();
+builder.Services.AddDbContext<MsSqlContext>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
