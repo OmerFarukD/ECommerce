@@ -1,4 +1,8 @@
 using ECommerce.WebApi.Contexts;
+using ECommerce.WebApi.Repository.Abstracts;
+using ECommerce.WebApi.Repository.Concretes;
+using ECommerce.WebApi.Service.Abstracts;
+using ECommerce.WebApi.Service.Concretes;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<MsSqlContext>();
+builder.Services.AddScoped<IProductRepository,EfProductRepository>();
+builder.Services.AddScoped<IProductService,ProductService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
