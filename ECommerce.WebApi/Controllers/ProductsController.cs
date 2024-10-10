@@ -1,10 +1,6 @@
-﻿using ECommerce.WebApi.Contexts;
-using ECommerce.WebApi.Models;
+﻿using ECommerce.WebApi.Models;
 using ECommerce.WebApi.Service.Abstracts;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
 namespace ECommerce.WebApi.Controllers;
 
 // @RestController
@@ -29,6 +25,11 @@ public class ProductsController : ControllerBase
         return Ok(products);
     }
 
-
+    [HttpPost("add")]
+    public IActionResult Add([FromBody]Product product)
+    {
+        var created = _productService.Add(product);
+        return Ok(created);
+    }
 
 }

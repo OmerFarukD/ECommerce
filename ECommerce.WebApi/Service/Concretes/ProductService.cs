@@ -1,7 +1,9 @@
-﻿using ECommerce.WebApi.Models;
+﻿using ECommerce.WebApi.Dtos.Products.Requests;
+using ECommerce.WebApi.Models;
 using ECommerce.WebApi.Repository.Abstracts;
 using ECommerce.WebApi.Repository.Concretes;
 using ECommerce.WebApi.Service.Abstracts;
+using ECommerce.WebApi.Service.Mappers;
 
 namespace ECommerce.WebApi.Service.Concretes;
 
@@ -9,14 +11,19 @@ public class ProductService : IProductService
 {
 
     private IProductRepository _productRepository;
-    public ProductService(IProductRepository productRepository)
+    private ProductMapper _productMapper;
+    public ProductService(IProductRepository productRepository,ProductMapper mapper)
     {
         _productRepository = productRepository;
+        _productMapper = mapper;
     }
 
 
-    public Product Add(Product product)
+    public Product Add(CreateProductRequest dto)
     {
+
+        Product product = _productMapper.ConvertToEntity(dto);
+
         Product added = _productRepository.Add(product);
 
         return added;
