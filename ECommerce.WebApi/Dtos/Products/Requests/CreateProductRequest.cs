@@ -1,6 +1,6 @@
 ﻿namespace ECommerce.WebApi.Dtos.Products.Requests;
 
-public record CreateProductRequest
+public sealed record CreateProductRequest
     (
     string Name,
     int Stock,

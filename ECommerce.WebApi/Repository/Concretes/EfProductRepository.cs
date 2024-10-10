@@ -34,12 +34,15 @@ public class EfProductRepository : IProductRepository
 
     public List<Product> GetAll()
     {
-        return _context.Products.ToList();
+        return _context.Products
+            .Include(x=> x.Category)
+            .ToList();
     }
 
     public Product? GetById(int id)
     {
-        Product? product = _context.Products.Find(id);
+        Product? product = _context.Products
+            .Include(x => x.Category).SingleOrDefault(x=>x.Id==id);
         return product;
     }
 

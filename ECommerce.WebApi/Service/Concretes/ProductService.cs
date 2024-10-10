@@ -1,4 +1,5 @@
 ﻿using ECommerce.WebApi.Dtos.Products.Requests;
+using ECommerce.WebApi.Dtos.Products.Responses;
 using ECommerce.WebApi.Models;
 using ECommerce.WebApi.Repository.Abstracts;
 using ECommerce.WebApi.Repository.Concretes;
@@ -36,15 +37,20 @@ public class ProductService : IProductService
         return product;
     }
 
-    public List<Product> GetAll()
+    public List<ProductResponseDto> GetAll()
     {
-        return _productRepository.GetAll();
+        List<Product> products = _productRepository.GetAll();
+        List<ProductResponseDto> responses = _productMapper.ConvertToResponseList(products);
+
+        return responses;
     }
 
-    public Product? GetById(int id)
+    public ProductResponseDto? GetById(int id)
     {
         Product product = _productRepository.GetById(id);
-        return product;
+
+        ProductResponseDto dto = _productMapper.ConvertToResponse(product);
+        return dto;
     }
 
     public Product Update(Product product)
